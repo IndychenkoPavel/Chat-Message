@@ -11,3 +11,146 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.App {
+  display: flex;
+}
+
+.left-block {
+  width: 350px;
+  height: auto;
+  background-color: rgb(245, 245, 245);
+}
+.left-block-top {
+  background-color: rgb(214, 214, 214);
+  padding: 10px;
+}
+.search-block {
+  margin-top: 10px;
+}
+.input-search {
+  width: 90%;
+  height: 30px;
+  padding-left: 10px;
+  display: block;
+  margin: auto;
+  border-radius: 10px;
+  border: 1px solid rgb(165, 165, 165);
+}
+.users-block {
+  padding-left: 10px;
+}
+.users-title {
+  color: rgb(76, 159, 201);
+  padding: 10px;
+  font-weight: 500;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.user-list {
+  border-bottom: 1px solid rgb(198, 198, 198);
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10px;
+  cursor: pointer;
+}
+
+.user-img, .login-user {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  overflow: hidden;
+}
+.user-img img, .login-user img {
+  width: 100%;
+}
+.user-text {
+  font-size: 14px;
+  color: rgb(132, 132, 132);
+}
+.user-data {
+  /* border: 1px solid; */
+  margin-top: -15px;
+  font-size: 13px;
+}
+
+
+/* RightBlock */
+
+.right-block {
+  width: 400px;
+  height: 500px;
+  background-color: rgb(253, 253, 253);
+  border-left: 1px solid rgb(207, 207, 207);
+ 
+}
+.message-block {
+  height: 100%;
+  padding-left: 10px;
+}
+.block-chat {
+  overflow-y: auto;
+  height: calc(100% - 110px);
+}
+
+.chat-user-name {
+  height: 40px;
+  background-color: rgb(228, 228, 228);
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+
+}
+.chat-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+.message-received .message-text {
+  min-height: 30px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(62, 62, 62);
+  text-align: right;
+  border-radius: 10px;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+}
+.message-send .message-text {
+  min-height: 30px;
+  border-radius: 10px;
+  background-color: rgb(39, 39, 39);
+  color: #fff;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+}
+.message-send .message-date {
+  font-size: 12px;
+}
+.message-received .message-date {
+  font-size: 12px;
+  text-align: right;
+}
+
+.form-message {
+  background-color: rgb(228, 228, 228);
+  padding: 15px; 
+}
+.input-message{ 
+  width: 90%;
+  margin: auto;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgb(214, 214, 214);
+  padding-left: 10px;
+
+}

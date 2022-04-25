@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const MessageBlock = ({ setUsers, users, userName, userImg, historyChat, setHistoryChat }) => {
+const MessageBlock = ({ setUsers, users, userName, userImg, historyChat, setHistoryChat, hideBlock }) => {
   const [chatMessage, setChatMessage] = useState("");
   const [interval, setInterval] = useState("");
 
@@ -30,6 +30,7 @@ const MessageBlock = ({ setUsers, users, userName, userImg, historyChat, setHist
     setTimeout(() => apiRequest(), 5000);
 
     reverseUsers();
+    setChatMessage('');
   };
 
   const apiRequest = async () => {
@@ -54,13 +55,15 @@ const MessageBlock = ({ setUsers, users, userName, userImg, historyChat, setHist
   const reverseUsers = () => {
     const filterUser = users.filter(item => item.name !== userName);
     const upUser = users.filter(item => item.name === userName);
-    const ttt = [upUser[0], ...filterUser]
-    setUsers(ttt);
+    upUser[0].history = historyChat;
+    const newList = [upUser[0], ...filterUser];
+    setUsers(newList);
+    localStorage.setItem("users", JSON.stringify(newList));
   }
 
   return (
     <div className="message-block">
-      <div className="chat-user-name"><img className="chat-img" src={!userImg ? '' : require(`${userImg}`)} alt="1" />{userName}</div>
+      <div className="chat-user-name"><img className="chat-img" src={!userImg ? '' : require(`${userImg}`)} alt="img" />{userName}</div>
       <div className="block-chat">
       {historyChat.map((message) => (
           <div
@@ -69,23 +72,30 @@ const MessageBlock = ({ setUsers, users, userName, userImg, historyChat, setHist
               message.keyMessage === "send" ? "message-send" : "message-received"
             }
           >
-            <p className="message-text">{message.textMessage}</p>
+            <div className="message-line">
+              {message.keyMessage !== "send" ? <img src={require(`${userImg}`)} className="message-line-img" alt="img" /> : <span /> }
+              <p className="message-text">{message.textMessage}</p>
+            </div>
             <p className="message-date">{message.dateMessage}</p>
           </div>
         ))}
       </div>
       <div className="form-message">
         <form onSubmit={onSubmit} action="">
-          <input
+          <div className="form-textarea">
+          <textarea
             type="text"
             className="input-message"
             value={chatMessage}
             placeholder='Type your message'
             onChange={(e) => setChatMessage(e.target.value)}
           />
-          <button type="submit">send</button>
+          <button className="btn-message" type="submit"></button>
+          </div>
+          
         </form>
       </div>
+      <button className="btn-back" onClick={hideBlock} >Back</button>
     </div>
   );
 };

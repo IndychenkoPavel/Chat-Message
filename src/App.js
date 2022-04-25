@@ -125,13 +125,23 @@ function App() {
   const [userName, setUserName] = useState("");
   const [search, setSearch] = useState("");
   const [userImg, setUserImg] = useState("");
-
+  const [leftOpen, setLeftOpen] = useState(true);
+  const [rightOpen, setRightOpen] = useState(true);
+  const [classAdd, setClassAdd] = useState('add-class');
+    
   useEffect(() => {
     setUsers(usersMass);
-    setHistoryChat(usersMass[0].history);
-    setUserName(usersMass[0].name);
-    setUserImg(usersMass[0].img);
-    localStorage.setItem("users", JSON.stringify(usersMass));
+    let LSinfo = JSON.parse(localStorage.getItem("users"));
+    if (LSinfo === null) {
+      setHistoryChat(usersMass[0].history);
+      setUserName(usersMass[0].name);
+      setUserImg(usersMass[0].img);
+      localStorage.setItem("users", JSON.stringify(usersMass));
+    } else {
+      setHistoryChat(LSinfo[0].history);
+      setUserName(LSinfo[0].name);
+      setUserImg(LSinfo[0].img);
+    } 
   }, []);
 
   const openHistory = (userId) => {
@@ -147,11 +157,26 @@ function App() {
     } else {
       setHistoryChat(dataLS);
     }
+    const screenWidth = window.innerWidth;
+    if ( screenWidth < 768 ) {
+      setLeftOpen(false);
+      setRightOpen(true);
+      setClassAdd('');
+      
+    } else {
+      setLeftOpen(true);
+      setRightOpen(true);
+    }
   };
 
+  const hideBlock = () => {
+    setLeftOpen(true);
+    setRightOpen(false);
+  }
+ 
   return (
     <div className="App">
-      <div className="left-block">
+      <div className={leftOpen === true ? "left-block" : "left-block hide"}>
         <div className="left-block-top">
           <div className="login-user">
             <img src={logo} alt="" />
@@ -167,10 +192,11 @@ function App() {
                 )
           }
           openHistory={openHistory}
+          search={search}
         />
       </div>
 
-      <div className="right-block">
+      <div className={rightOpen === true ? `right-block ${classAdd}` : "right-block hide"}>
         <MessageBlock
           setUsers={setUsers}
           users={users}
@@ -178,6 +204,7 @@ function App() {
           userImg={userImg}
           historyChat={historyChat}
           setHistoryChat={setHistoryChat}
+          hideBlock={hideBlock}
         />
       </div>
     </div>

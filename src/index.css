@@ -18,8 +18,12 @@ code {
 }
 .App {
   display: flex;
+  border: 2px solid rgb(202, 202, 202);
+  width: 750px;
+  padding: 10px;
+  margin: 50px auto;
+  border-radius: 10px;
 }
-
 .left-block {
   width: 350px;
   height: auto;
@@ -51,7 +55,6 @@ code {
   font-size: 18px;
   margin-bottom: 10px;
 }
-
 .user-list {
   border-bottom: 1px solid rgb(198, 198, 198);
   list-style: none;
@@ -61,7 +64,6 @@ code {
   padding: 20px 10px;
   cursor: pointer;
 }
-
 .user-img, .login-user {
   width: 40px;
   height: 40px;
@@ -76,11 +78,9 @@ code {
   color: rgb(132, 132, 132);
 }
 .user-data {
-  /* border: 1px solid; */
   margin-top: -15px;
   font-size: 13px;
 }
-
 
 /* RightBlock */
 
@@ -89,7 +89,6 @@ code {
   height: 500px;
   background-color: rgb(253, 253, 253);
   border-left: 1px solid rgb(207, 207, 207);
- 
 }
 .message-block {
   height: 100%;
@@ -99,14 +98,12 @@ code {
   overflow-y: auto;
   height: calc(100% - 110px);
 }
-
 .chat-user-name {
   height: 40px;
   background-color: rgb(228, 228, 228);
   display: flex;
   align-items: center;
   padding-left: 10px;
-
 }
 .chat-img {
   width: 30px;
@@ -114,43 +111,176 @@ code {
   border-radius: 100%;
   margin-right: 10px;
 }
-.message-received .message-text {
-  min-height: 30px;
-  background-color: rgb(255, 255, 255);
-  color: rgb(62, 62, 62);
-  text-align: right;
-  border-radius: 10px;
-  padding: 10px 0;
+.message-send {
   display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+/* .message-send .message-line {
+  width: 100px;
+  height: 30px;
+} */
+
+.message-line {
+  display: flex;
+  width: 100%;
   align-items: center;
+  margin-top: 10px;
+  height: auto;
+  word-wrap: break-word;
+}
+.message-line-img {
+  width: 30px;
+  height: 30px;
+  display: block;
+  border-radius: 100%;
+}
+.message-received .message-text {
+  width: auto;
+  max-width: 90%;
+  background-color: rgb(39, 39, 39);
+  color: #fff;
+  border-radius: 40px;
+  padding: 5px 10px;
+  display: flex;
+  margin-left: 10px;
 }
 .message-send .message-text {
   min-height: 30px;
-  border-radius: 10px;
-  background-color: rgb(39, 39, 39);
-  color: #fff;
-  padding: 0 10px;
-  display: flex;
-  align-items: center;
+  width: auto;
+  max-width: 90%;
+  border-radius: 40px;
+  background-color: rgb(239, 239, 239);
+  color: rgb(41, 41, 41);
+  padding: 5px 10px;
+  word-wrap: break-word;
+  margin-right: 0;
+  margin-left: auto;
 }
 .message-send .message-date {
-  font-size: 12px;
+  font-size: 10px;
+  margin-right: 5px;
 }
 .message-received .message-date {
-  font-size: 12px;
-  text-align: right;
+  font-size: 10px;
+  margin-left: 45px;
 }
-
 .form-message {
-  background-color: rgb(228, 228, 228);
+  background-color: rgb(231, 228, 228);
   padding: 15px; 
 }
-.input-message{ 
+.form-textarea {
+  width: 100%;
+  height: 44px;
+  max-height: auto;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgb(214, 214, 214);
+  border-radius: 40px;
+  background-color: #fff;
+}
+.input-message { 
+  display: flex;
+  align-items: center;
+  resize: none;
+  outline: 0;
   width: 90%;
-  margin: auto;
   height: 40px;
-  border-radius: 10px;
-  border: 1px solid rgb(214, 214, 214);
-  padding-left: 10px;
+  border-radius: 40px;
+  padding: 5px 10px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  border: none;
+  font-size: 14px;
+}
+.input-message::placeholder {
+  padding: 5px 0;
+}
+.input-message::-webkit-scrollbar {
+  display: none;
+}
+.btn-message {
+  width: 30px;
+  height: 25px;
+  position: absolute;
+  right: 5px;
+  top: 7px;
+  display: block;
+  background: none;
+  background-image: url("./components/img/send.png");
+  background-repeat: no-repeat;
+  background-size: 90%;
+  cursor: pointer;
+  border: none;
+}
 
+.btn-back {
+  display: none;
+  width: 100%;
+  height: 30px;
+  margin: 5px auto;
+  background-color: rgb(58, 132, 45);
+  color: #fff;
+  transition: all 0.3s linear;
+  cursor: pointer;
+  border: none;
+  border-radius: 40px;
+}
+.btn-back:hover {
+  background-color: rgb(61, 203, 50);
+  color: rgb(28, 28, 28);
+}
+.left-block.hide {
+  display: none;
+}
+.right-block.hide {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .App {
+    display: block;
+    width: auto;
+    background-color: rgba(239, 239, 239, 0.772);
+    height: 100vh;
+  }
+  .left-block {
+    margin: auto;
+    width: auto;
+    max-width: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .message-block {
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 12px;
+  }
+  .right-block {
+    height: 100%;
+    margin: auto;
+    width: auto;
+    max-width: 500px;
+    border-radius: 10px;
+    overflow: hidden;  
+  }
+  .message-line {
+    padding: 0 10px;
+  }
+  .add-class {
+    display: none;
+  }
+  .btn-back {
+    display: block;
+  }
+  .user-center {
+    margin-left: 10px;
+    margin-right: auto;
+  }
 }

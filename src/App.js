@@ -127,9 +127,13 @@ function App() {
   const [userImg, setUserImg] = useState("");
   const [leftOpen, setLeftOpen] = useState(true);
   const [rightOpen, setRightOpen] = useState(true);
-  const [classAdd, setClassAdd] = useState('add-class');
-    
-  useEffect(() => {
+  const [classAdd, setClassAdd] = useState("add-class");
+
+  useEffect(() => { 
+    loading();
+  },);
+
+  const loading = () => {
     setUsers(usersMass);
     let LSinfo = JSON.parse(localStorage.getItem("users"));
     if (LSinfo === null) {
@@ -141,8 +145,8 @@ function App() {
       setHistoryChat(LSinfo[0].history);
       setUserName(LSinfo[0].name);
       setUserImg(LSinfo[0].img);
-    } 
-  }, []);
+    }
+  }
 
   const openHistory = (userId) => {
     const userObj = users.filter((user) => user.id === userId);
@@ -158,11 +162,10 @@ function App() {
       setHistoryChat(dataLS);
     }
     const screenWidth = window.innerWidth;
-    if ( screenWidth < 768 ) {
+    if (screenWidth < 768) {
       setLeftOpen(false);
       setRightOpen(true);
-      setClassAdd('');
-      
+      setClassAdd("");
     } else {
       setLeftOpen(true);
       setRightOpen(true);
@@ -172,8 +175,8 @@ function App() {
   const hideBlock = () => {
     setLeftOpen(true);
     setRightOpen(false);
-  }
- 
+  };
+
   return (
     <div className="App">
       <div className={leftOpen === true ? "left-block" : "left-block hide"}>
@@ -196,7 +199,11 @@ function App() {
         />
       </div>
 
-      <div className={rightOpen === true ? `right-block ${classAdd}` : "right-block hide"}>
+      <div
+        className={
+          rightOpen === true ? `right-block ${classAdd}` : "right-block hide"
+        }
+      >
         <MessageBlock
           setUsers={setUsers}
           users={users}
